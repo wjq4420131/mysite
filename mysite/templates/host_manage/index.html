@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block crumbs %}
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/host">主页</a>
+                </li>
+                <li class="active">
+                    <a class="this">基础信息</a>
+                </li>
+                <li class="active">
+                    <a class="this-page">主机管理</a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <a href="/base/project_add/" class="btn btn-primary">添加项目</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>服务器名称</th>
+                            <th>ip地址</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>端口</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for host in host %}
+                            <tr>
+                                <td>{{ host.name }}</td>
+                                <td>{{ host.ip }}</td>
+                                <td>{{ host.username }}</td>
+                                <td>{{ host.password }}</td>
+                                <td>{{ host.port }}</td>
+                                <td>
+                                    <a href="/base/project_update?prj_id={{ prj.prj_id }}"
+                                       class="layui-btn layui-btn-xs"
+                                       lay-event="edit">编辑</a>
+
+                                    <a href="/host/delete/{{ host.id }}"
+                                       class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <nav style="text-align: center">
+
+                <ul class="pagination">
+                    <li>
+                        <a href="/host/?page{{ previous }}" aria-label="上一页">
+                            <span aria-hidden="true">上一页</span>
+                        </a>
+                    </li>
+                    {% for number in page_num %}
+
+                        <li><a href="/host/?page={{ number }}">{{ number }}</a></li>
+
+                    {% endfor %}
+                    <li>
+                        <a href="/host/?page={{ next_page }}" aria-label="下一页">
+                            <span aria-hidden="true">下一页</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+
+    </div>
+{% endblock %}

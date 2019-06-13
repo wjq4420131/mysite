@@ -1,0 +1,10 @@
+
+<div class="row text-center vertical-middle-sm">
+    <h1>Login</h1>
+    <p>Input your username and password</p>
+    <form class="form-horizontal" action="." method="post">
+        {% csrf_token %} <!--post提交数据时必须要加-->
+        {{ form.as_p }} <!--将表单的每个输入框包裹在一个<p>标签内 tags-->
+        <input type="submit" value="Login">
+    </form>
+</div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>用户输入：</h1>
+<form action="/login/" method="post">
+    {% csrf_token %}
+    用户名：<input type="text" name="username"/><br/>
+    密码：<input type="password" name="password"/><br/>
+    <input type="submit" value="提交"/>
+</form>
+
+<h1>用户展示：</h1>
+<table border="1">
+    <thead>
+    <tr>用户名</tr>
+    <tr>密码</tr>
+    </thead>
+    <tbody>
+    {% for item in user_list %}
+        <tr>
+            <td>{{ item.username }}</td>
+            <td>{{ item.password }}</td>
+            <td><a href="/login/delete/{{ item.id }}">删除</a></td>
+            <td> 修改</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+    <ul class="pagination">
+        <li>
+            <a href="/login/?page{{ previous }}" aria-label="上一页">
+                <span aria-hidden="true">上一页</span>
+            </a>
+        </li>
+        {% for number in page_num %}
+
+            <li><a href="/login/?page={{ number }}">{{ number }}</a></li>
+
+        {% endfor %}
+        <li>
+            <a href="/login/?page={{ next_page }}" aria-label="下一页">
+                <span aria-hidden="true">下一页</span>
+            </a>
+        </li>
+    </ul>
+
+
+</body>
+</html>
